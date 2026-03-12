@@ -291,7 +291,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   max-width:1380px;margin:0 auto;
   padding:0 clamp(1.5rem,5vw,5rem);
   padding-top:6rem;
-  max-width:760px;
+  padding-right:46%;
 }
 .hero-eyebrow{
   font-family:var(--font-label);
@@ -356,7 +356,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .hero-scroll span{
   font-family:var(--font-label);
-  font-size:0.55rem;
+  font-size:0.75rem;
   letter-spacing:0.3em;
   text-transform:uppercase;
   color:rgba(255,255,255,0.4);
@@ -488,7 +488,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .about-photo-contact a{
   font-family:var(--font-label);
-  font-size:0.65rem;
+  font-size:0.78rem;
   font-weight:600;
   letter-spacing:0.18em;
   text-transform:uppercase;
@@ -604,7 +604,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   position:absolute;
   top:1.5rem;left:1.5rem;
   font-family:var(--font-label);
-  font-size:0.55rem;
+  font-size:0.75rem;
   font-weight:700;
   letter-spacing:0.25em;
   text-transform:uppercase;
@@ -854,7 +854,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-family:var(--font-display);
   font-size:1.1rem;
   font-style:italic;
-  color:rgba(255,255,255,0.45);
+  color:rgba(255,255,255,0.80);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1006,7 +1006,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   align-items:center;
   justify-content:center;
   font-family:var(--font-label);
-  font-size:0.38rem;
+  font-size:0.75rem;
   font-weight:700;
   letter-spacing:0.05em;
   text-transform:uppercase;
@@ -1318,6 +1318,54 @@ footer{
   right: auto !important;
   left: 1.75rem !important;
 }
+
+/* v5: Hero — flush left, text on left half */
+section.hero, div.hero, #hero {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: flex-start !important;
+}
+.hero-content, .hero-inner, .hero-body, .hero-copy, .hero-text,
+.hero > div, .hero > section > div {
+  text-align: left !important;
+  align-items: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  padding-left: 5vw !important;
+  padding-right: 0 !important;
+  max-width: 55% !important;
+}
+.hero-content h1, .hero-inner h1, .hero > div h1 { text-align: left !important; }
+.hero-stats, .hero-actions, .hero-buttons { justify-content: flex-start !important; }
+.hero-content .eyebrow, .hero-inner .eyebrow,
+.eyebrow, [class*="eyebrow"] { text-align: left !important; }
+@media (max-width: 768px) {
+  .hero-content, .hero-inner, .hero-body, .hero-copy, .hero-text,
+  .hero > div, .hero > section > div {
+    max-width: 90% !important;
+    padding-left: 1.5rem !important;
+  }
+}
+
+/* v5: Career milestone card — clear overlap */
+.result-card-stat, .milestone-number, .career-stat,
+[class*="milestone"] h2, [class*="milestone"] h3,
+[class*="result-card"] h2, [class*="result-card"] .stat-number {
+  position: relative !important;
+  margin-top: 2.5rem !important;
+  z-index: 2 !important;
+}
+[class*="milestone"] .eyebrow,
+[class*="milestone"] [class*="eyebrow"],
+[class*="result-card"] .eyebrow,
+[class*="result-card"] [class*="label"],
+[class*="result-card"] [class*="category"] {
+  position: absolute !important;
+  top: 1.25rem !important;
+  left: 1.25rem !important;
+  z-index: 3 !important;
+}
 </style>
 </head>
 <body>
@@ -1369,9 +1417,7 @@ footer{
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+  
   </div>
 
   <div class="hero-badge">
@@ -1584,7 +1630,7 @@ footer{
     <div class="section-header">
       <div>
         <p class="eyebrow fade-up" style="color:var(--gold)">Track Record</p>
-        <h2 class="section-title fade-up" style="color:var(--white);transition-delay:.1s">Results That Speak</h2>
+        <h2 class="section-title fade-up" style="color:var(--white);transition-delay:.1s">Results That Speak For Themselves</h2>
       </div>
     </div>
 
@@ -1622,7 +1668,7 @@ footer{
         <div class="result-card-img" style="background:linear-gradient(135deg,#14213D,#1C2E54);display:flex;align-items:center;justify-content:center;aspect-ratio:3/2">
           <div style="text-align:center;padding:2rem">
             <div style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:#B5985A;line-height:1">$500M+</div>
-            <div style="font-family:Montserrat,sans-serif;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:0.75rem">Total career sales</div>
+            <div style="font-family:Montserrat,sans-serif;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:0.75rem">Total career sales</div>
           </div>
         </div>
         <div class="result-card-body">
@@ -1965,12 +2011,7 @@ function handleForm(e) {
 #tc-fab{width:56px;height:56px;background:linear-gradient(135deg,#B5985A,#9A7D42);border:none;cursor:pointer;box-shadow:0 8px 30px rgba(181,152,90,0.42);display:flex;align-items:center;justify-content:center;font-size:1.5rem;transition:transform 0.25s,box-shadow 0.25s;flex-shrink:0}
 #tc-fab:hover{transform:scale(1.07);box-shadow:0 12px 40px rgba(181,152,90,0.58)}
 </style>
-
-<div id="tc-wrap">
-  <div id="tc-box" role="dialog" aria-label="Todd Sherley AI Property Concierge">
-    <div id="tc-header">
-      <div id="tc-avatar">&#127968;</div>
-      <div>
+<div>
         <span id="tc-name">Todd's Concierge</span>
         <span id="tc-sub">AI Property Assistant</span>
       </div>
@@ -2087,6 +2128,127 @@ Respond in under 120 words.';
 })();
 </script>
 <!-- ══════════════════════════════════════════════════════════════════════ -->
+
+<!-- TODD AI CONCIERGE v5 (mock — no API key required) -->
+<style>
+#tc-wrap{position:fixed;bottom:1.75rem;right:1.75rem;z-index:9900;display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem}
+#tc-box{display:none;flex-direction:column;width:360px;max-height:540px;background:#0C1525;border:1px solid rgba(181,152,90,0.35);border-radius:4px;box-shadow:0 24px 72px rgba(0,0,0,0.6),0 0 0 1px rgba(181,152,90,0.06);overflow:hidden;font-family:'DM Sans',sans-serif}
+#tc-header{background:linear-gradient(135deg,#14213D 0%,#0C1525 100%);padding:0.9rem 1.125rem;border-bottom:1px solid rgba(181,152,90,0.18);display:flex;align-items:center;gap:0.75rem;flex-shrink:0}
+#tc-avatar{width:36px;height:36px;border-radius:50%;background:#B5985A;border:1px solid rgba(181,152,90,0.6);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tc-name{font-size:0.80rem;font-weight:700;letter-spacing:0.08em;color:#fff;line-height:1.2;display:block}
+#tc-sub{font-size:0.75rem;letter-spacing:0.09em;color:#B5985A;margin-top:2px;display:block}
+#tc-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.50);display:flex;align-items:center;justify-content:center;padding:4px;margin-left:auto;flex-shrink:0;transition:color 0.2s;border-radius:2px}
+#tc-close:hover{color:#fff}
+#tc-msgs{flex:1;overflow-y:auto;padding:1rem 1.125rem;display:flex;flex-direction:column;gap:0.7rem;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(181,152,90,0.22) transparent}
+.tc-ai,.tc-user{padding:0.75rem 0.9rem;font-size:0.88rem;line-height:1.65;max-width:88%;word-break:break-word;color:rgba(255,255,255,0.90);border-radius:3px}
+.tc-ai{background:rgba(255,255,255,0.04);border:1px solid rgba(181,152,90,0.14);align-self:flex-start}
+.tc-user{background:rgba(181,152,90,0.13);border:1px solid rgba(181,152,90,0.28);align-self:flex-end}
+.tc-typing{min-height:2.5rem;display:flex;align-items:center;gap:5px;padding:0.75rem 1rem}
+.tc-typing span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#B5985A;animation:tcDot 1.2s infinite ease-in-out;flex-shrink:0}
+.tc-typing span:nth-child(2){animation-delay:.22s}
+.tc-typing span:nth-child(3){animation-delay:.44s}
+@keyframes tcDot{0%,80%,100%{transform:scale(0.55);opacity:0.35}40%{transform:scale(1);opacity:1}}
+#tc-footer{padding:0.75rem 1rem;border-top:1px solid rgba(181,152,90,0.13);display:flex;gap:0.55rem;align-items:center;background:rgba(0,0,0,0.2);flex-shrink:0}
+#tc-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:0.875rem;padding:0.6rem 0.85rem;outline:none;transition:border-color 0.2s;font-family:'DM Sans',sans-serif;border-radius:2px}
+#tc-input:focus{border-color:#B5985A}
+#tc-input::placeholder{color:rgba(255,255,255,0.80)}
+#tc-input:disabled{opacity:0.45}
+#tc-send{width:36px;height:36px;flex-shrink:0;background:#B5985A;border:none;cursor:pointer;color:#0C1525;display:flex;align-items:center;justify-content:center;transition:background 0.2s,transform 0.15s;border-radius:2px;font-size:1.1rem;font-weight:700}
+#tc-send:hover{background:#CEAD76;transform:translateX(2px)}
+#tc-send:disabled{background:rgba(181,152,90,0.25);cursor:default;transform:none}
+#tc-fab{width:54px;height:54px;background:linear-gradient(135deg,#C4A45A,#9A7D42);border:none;cursor:pointer;box-shadow:0 6px 28px rgba(181,152,90,0.5);display:flex;align-items:center;justify-content:center;border-radius:50%;transition:transform 0.25s,box-shadow 0.25s;flex-shrink:0}
+#tc-fab:hover{transform:scale(1.08);box-shadow:0 10px 38px rgba(181,152,90,0.65)}
+#tc-fab-close{display:none;align-items:center;justify-content:center}
+#tc-fab svg{transition:opacity 0.2s}
+</style>
+
+<div id="tc-wrap">
+  <div id="tc-box" role="dialog" aria-label="Todd Sherley AI Property Concierge">
+    <div id="tc-header">
+      <div id="tc-avatar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0C1525" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+      <div><span id="tc-name">Todd&#39;s Concierge</span><span id="tc-sub">AI Property Assistant</span></div>
+      <button id="tc-close" onclick="tcToggle()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div id="tc-msgs">
+      <div class="tc-ai">Hi &#8212; I&#39;m Todd&#39;s AI Property Concierge. Ask me about his listings, experience, or how to book a free appraisal.</div>
+    </div>
+    <div id="tc-footer">
+      <input id="tc-input" type="text" placeholder="Ask about Todd&#39;s listings&#8230;" autocomplete="off"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSend()}">
+      <button id="tc-send" onclick="tcSend()" aria-label="Send">&#8594;</button>
+    </div>
+  </div>
+  <button id="tc-fab" onclick="tcToggle()" aria-label="Open Todd&#39;s AI Concierge">
+    <span id="tc-fab-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0C1525" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span>
+    <span id="tc-fab-close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#0C1525" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+  </button>
+</div>
+
+<script>
+(function(){
+  var R={
+    appraisal:["Todd offers free, no-obligation appraisals 7 days a week across all Auckland suburbs. Book above or call 021 686 000 — he'll have a full market assessment ready within 24 hours.","A free appraisal with Todd takes around 30 minutes. He'll walk you through comparable sales, current demand, and a realistic price range. Call 021 686 000 to lock in a time."],
+    listings:["Todd has 5 active listings right now: Mount Eden (5 bed, deadline sale), Auckland Central (3 bed, EOI $1,199,000), Glenfield (3 bed), Mangere East (9 bed), and Weymouth (4 bed, EOI $749,000). View all at atrealty.co.nz/toddsherley","Current properties range from $749,000 in Weymouth to $1,199,000 in Auckland Central. Todd also has off-market opportunities for qualified buyers — call 021 686 000 to discuss."],
+    sell:["Todd's average days-on-market is well below the Auckland median. He combines the largest buyer database in the AT Realty network with a targeted digital campaign for every listing. Book a free appraisal to get started.","Selling with Todd means 23 suburb records, a proven auction strategy, and a database built over 12 years. He's also a published author on home sales — the expertise is real. Book a free appraisal above."],
+    buy:["Todd works with buyers as well as sellers. His database includes off-market properties that never reach Trade Me. Call 021 686 000 to discuss what you're looking for.","Tell Todd your brief — suburb, budget, must-haves — and he'll match you against active and off-market stock first. Fastest way is a call on 021 686 000."],
+    experience:["Todd has 12+ years in Auckland real estate, $500M+ in career sales, and 23 suburb price records. He holds a Law and Business degree from Waikato and was the 2017 National Rising Star Auctioneer Champion.","Todd literally wrote the book — his Amazon number 1 bestseller 'How to $ell Your Home For Top Dollar' is available online. He's been at Elite Realty, Shortland St CBD, since 2012."],
+    contact:["Todd is available 7 days: call or text 021 686 000, email todd@eliterealty.net.nz, or visit Shortland Street, Auckland CBD. He typically replies within the hour.","Best way to reach Todd: call 021 686 000 seven days a week. For a formal appraisal request, use the booking form above and he'll confirm same day."],
+    book:["To book your free appraisal hit 'Book an Appraisal' above or call 021 686 000. Todd covers all Auckland suburbs and turnaround is within 24 hours.","Booking is quick — use the form above or call 021 686 000. Todd confirms within the hour and brings a full comparable sales report to the meeting."],
+    fallback:["Great question for Todd directly. He's on 021 686 000 seven days or you can book a free appraisal above — he'll have the answer.","I'd point you straight to Todd for that one. He's available 7 days on 021 686 000 and responds fast.","Todd would be the right person to answer that properly. Hit 'Book an Appraisal' above or call 021 686 000 any day of the week."]
+  };
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function classify(m){
+    if(/apprais|valuat|worth|value my|how much/.test(m)) return 'appraisal';
+    if(/list|for sale|on market|available|propert/.test(m)) return 'listings';
+    if(/sell|selling|vendor|market my|list my/.test(m)) return 'sell';
+    if(/buy|buying|purchas|looking for|find me|off.?market/.test(m)) return 'buy';
+    if(/experienc|record|career|degree|book|author|auction|champion|background/.test(m)) return 'experience';
+    if(/contact|phone|email|address|office|reach|call|text/.test(m)) return 'contact';
+    if(/book|appoint|meet|schedule|when|time|availab/.test(m)) return 'book';
+    return 'fallback';
+  }
+  var tcOpen=false;
+  window.tcToggle=function(){
+    tcOpen=!tcOpen;
+    var box=document.getElementById('tc-box');
+    var fabOpen=document.getElementById('tc-fab-open');
+    var fabClose=document.getElementById('tc-fab-close');
+    box.style.display=tcOpen?'flex':'none';
+    fabOpen.style.display=tcOpen?'none':'flex';
+    fabClose.style.display=tcOpen?'flex':'none';
+    if(tcOpen){setTimeout(function(){document.getElementById('tc-input').focus();},80);}
+  };
+  function tcScroll(){var c=document.getElementById('tc-msgs');c.scrollTop=c.scrollHeight;}
+  function tcAddMsg(content,role,isRaw){
+    var c=document.getElementById('tc-msgs');
+    var d=document.createElement('div');
+    d.className=role==='ai'?'tc-ai':'tc-user';
+    if(isRaw){d.innerHTML=content;}else{d.textContent=content;}
+    c.appendChild(d);tcScroll();return d;
+  }
+  window.tcSend=function(){
+    var input=document.getElementById('tc-input');
+    var btn=document.getElementById('tc-send');
+    var msg=input.value.trim();
+    if(!msg||btn.disabled)return;
+    input.value='';input.disabled=true;btn.disabled=true;
+    tcAddMsg(msg,'user',false);
+    var typing=document.createElement('div');
+    typing.className='tc-ai tc-typing';
+    typing.innerHTML='<span></span><span></span><span></span>';
+    document.getElementById('tc-msgs').appendChild(typing);tcScroll();
+    setTimeout(function(){
+      var reply=pick(R[classify(msg.toLowerCase())]);
+      typing.className='tc-ai';
+      typing.innerHTML='';
+      typing.textContent=reply;
+      tcScroll();
+      input.disabled=false;btn.disabled=false;input.focus();
+    },650+Math.random()*350);
+  };
+})();
+</script>
+<!-- END TODD AI CONCIERGE v5 -->
 
 </body>
 </html>

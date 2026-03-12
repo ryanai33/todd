@@ -1288,6 +1288,36 @@ footer{
   right: auto !important;
   left: 1.75rem !important;
 }
+
+/* Todd v4: Hero left-alignment — non-negotiable */
+.hero-content,
+.hero-inner,
+.hero-body,
+.hero-copy,
+.hero-text {
+  text-align: left;
+  align-items: flex-start;
+}
+.hero-content h1,
+.hero-inner h1,
+.hero-body h1 { text-align: left; }
+.hero-content .hero-stats,
+.hero-inner .hero-stats,
+.hero-content .hero-actions,
+.hero-inner .hero-actions {
+  justify-content: flex-start;
+}
+.hero-content .eyebrow,
+.hero-inner .eyebrow { text-align: left; }
+
+/* Todd v4: Credential badge bottom-LEFT — clear of concierge FAB */
+.hero-badge,
+.hero-credential,
+.hero-license,
+.hero-bottom-badge {
+  right: auto !important;
+  left: 1.75rem !important;
+}
 </style>
 </head>
 <body>
@@ -1909,6 +1939,7 @@ function handleForm(e) {
   e.target.reset();
 }
 </script>
+<!-- ══════════════════════════════════════════════════════════════════════ -->
 
 <!-- ══════════════════════ TODD AI CONCIERGE v4 ══════════════════════════ -->
 <style>

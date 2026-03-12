@@ -264,7 +264,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .hero-bg{
   position:absolute;inset:0;
-  background-image:url('images/hero.jpg');
+  background-image:url('images/hero.webp');
   background-size:cover;
   background-position:center 40%;
   transform-origin:center;
@@ -291,6 +291,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   max-width:1380px;margin:0 auto;
   padding:0 clamp(1.5rem,5vw,5rem);
   padding-top:6rem;
+  max-width:760px;
 }
 .hero-eyebrow{
   font-family:var(--font-label);
@@ -305,7 +306,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .hero-title{
   font-family:var(--font-display);
-  font-size:clamp(3.5rem,7.5vw,7rem);
+  font-size:clamp(2.8rem,5.5vw,5.5rem);
   font-weight:300;
   line-height:1.06;
   color:var(--white);
@@ -468,7 +469,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:top center;
+  object-position:center top;
   display:block;
   transition:transform 8s var(--ease);
 }
@@ -1247,6 +1248,16 @@ footer{
   .testimonial{padding:2.5rem 1.75rem}
   .form-row{grid-template-columns:1fr}
 }
+
+.footer-phone{
+  font-family:var(--font-label);
+  font-size:0.88rem;
+  font-weight:700;
+  letter-spacing:0.15em;
+  color:var(--gold);
+  transition:color 0.25s;
+}
+.footer-phone:hover{color:var(--gold-lt)}
 </style>
 </head>
 <body>
@@ -1334,7 +1345,7 @@ footer{
 <!-- ══════════════ ABOUT ══════════════ -->
 <section class="about" id="about">
   <div class="about-photo-wrap">
-    <img src="images/todd.jpg" alt="Todd Sherley — Auckland Real Estate Agent" loading="lazy"
+    <img src="images/todd.jpg" alt="Todd Sherley — Principal, Director & Branch Manager, Elite Realty Auckland" loading="lazy"
          onerror="this.src='';this.parentNode.style.background='linear-gradient(135deg,#14213D,#0C1525)'">
     <div class="about-photo-overlay"></div>
     <div class="about-photo-contact">
@@ -1768,7 +1779,7 @@ footer{
   <div class="footer-inner">
     <span class="footer-brand">Todd Sherley &mdash; Elite Realty</span>
     <span class="footer-copy">Licensed Salesperson &mdash; REAA 2008 &nbsp;&middot;&nbsp; &copy; 2025 Todd Sherley. All Rights Reserved.</span>
-    <span class="footer-copy" style="color:rgba(255,255,255,0.18)">021 686 000</span>
+    <a class="footer-phone" href="tel:021686000">021 686 000</a>
   </div>
 </footer>
 
@@ -1866,6 +1877,155 @@ function handleForm(e) {
   msg.style.display = 'block';
   msg.textContent = 'Thank you — Todd will be in touch within 24 hours.';
   e.target.reset();
+}
+</script>
+
+
+<!-- ══════════════ AI CONCIERGE ══════════════ -->
+<div id="concierge-wrap" style="
+  position:fixed;bottom:2rem;right:2rem;z-index:9000;
+  display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
+
+  <!-- Chat window -->
+  <div id="concierge-box" style="
+    display:none;
+    width:360px;max-height:520px;
+    background:#0C1525;
+    border:1px solid rgba(181,152,90,0.35);
+    box-shadow:0 24px 60px rgba(0,0,0,0.45);
+    flex-direction:column;overflow:hidden;">
+    
+    <!-- Header -->
+    <div style="
+      background:linear-gradient(135deg,#14213D,#0C1525);
+      padding:1rem 1.25rem;
+      border-bottom:1px solid rgba(181,152,90,0.2);
+      display:flex;align-items:center;gap:0.75rem;">
+      <div style="
+        width:38px;height:38px;border-radius:50%;
+        background:rgba(181,152,90,0.15);
+        border:1px solid rgba(181,152,90,0.4);
+        display:flex;align-items:center;justify-content:center;
+        font-size:1.1rem;flex-shrink:0;">🏡</div>
+      <div>
+        <div style="font-family:Montserrat,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;color:#fff">Todd's Concierge</div>
+        <div style="font-family:Montserrat,sans-serif;font-size:0.62rem;letter-spacing:0.1em;color:#B5985A;margin-top:2px">AI Property Assistant</div>
+      </div>
+      <button onclick="toggleConcierge()" style="
+        margin-left:auto;color:rgba(255,255,255,0.5);font-size:1.2rem;
+        background:none;border:none;cursor:pointer;line-height:1;
+        transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&#215;</button>
+    </div>
+
+    <!-- Messages -->
+    <div id="concierge-msgs" style="
+      flex:1;overflow-y:auto;padding:1.25rem;
+      display:flex;flex-direction:column;gap:0.75rem;
+      scrollbar-width:thin;scrollbar-color:rgba(181,152,90,0.3) transparent;">
+      <div class="cmsg-ai" style="
+        background:rgba(255,255,255,0.05);
+        border:1px solid rgba(181,152,90,0.15);
+        padding:0.85rem 1rem;
+        font-family:'DM Sans',sans-serif;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88);
+        max-width:90%;align-self:flex-start;">
+        Hi! I'm Todd's AI Concierge. I can answer questions about his listings, services, or how to book an appraisal. How can I help?
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div style="
+      padding:0.85rem 1rem;
+      border-top:1px solid rgba(181,152,90,0.15);
+      display:flex;gap:0.6rem;align-items:center;background:rgba(0,0,0,0.2);">
+      <input id="concierge-input" type="text" placeholder="Ask about Todd's listings…"
+        style="
+          flex:1;background:rgba(255,255,255,0.05);
+          border:1px solid rgba(255,255,255,0.12);
+          color:#fff;font-family:'DM Sans',sans-serif;font-size:0.88rem;
+          padding:0.65rem 0.85rem;outline:none;
+          transition:border-color 0.2s;"
+        onfocus="this.style.borderColor='#B5985A'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"
+        onkeydown="if(event.key==='Enter')sendConcierge()">
+      <button onclick="sendConcierge()" id="concierge-send" style="
+        width:38px;height:38px;flex-shrink:0;
+        background:#B5985A;border:none;cursor:pointer;
+        display:flex;align-items:center;justify-content:center;
+        font-size:1rem;color:#0C1525;
+        transition:background 0.2s;"
+        onmouseover="this.style.background='#CEAD76'" onmouseout="this.style.background='#B5985A'">&#8594;</button>
+    </div>
+  </div>
+
+  <!-- FAB trigger -->
+  <button id="concierge-fab" onclick="toggleConcierge()" aria-label="Open AI Concierge" style="
+    width:58px;height:58px;
+    background:linear-gradient(135deg,#B5985A,#9A7D42);
+    border:none;cursor:pointer;
+    box-shadow:0 8px 28px rgba(181,152,90,0.45);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;
+    transition:transform 0.25s,box-shadow 0.25s;"
+    onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 12px 36px rgba(181,152,90,0.6)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 8px 28px rgba(181,152,90,0.45)'">
+    <span id="fab-icon">🏡</span>
+  </button>
+</div>
+
+<script>
+const CONCIERGE_CONTEXT = ;
+
+let conciergeOpen = false;
+let chatHistory = [];
+
+function toggleConcierge() {
+  const box = document.getElementById('concierge-box');
+  conciergeOpen = !conciergeOpen;
+  box.style.display = conciergeOpen ? 'flex' : 'none';
+  document.getElementById('fab-icon').textContent = conciergeOpen ? '✕' : '🏡';
+  if(conciergeOpen) setTimeout(() => document.getElementById('concierge-input').focus(), 100);
+}
+
+function addMsg(text, role) {
+  const msgs = document.getElementById('concierge-msgs');
+  const isAi = role === 'ai';
+  const div = document.createElement('div');
+  div.style.cssText = isAi
+    ? 'background:rgba(255,255,255,0.05);border:1px solid rgba(181,152,90,0.15);padding:0.85rem 1rem;font-family:"DM Sans",sans-serif;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88);max-width:90%;align-self:flex-start;'
+    : 'background:rgba(181,152,90,0.12);border:1px solid rgba(181,152,90,0.25);padding:0.85rem 1rem;font-family:"DM Sans",sans-serif;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88);max-width:90%;align-self:flex-end;';
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+async function sendConcierge() {
+  const input = document.getElementById('concierge-input');
+  const msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+  addMsg(msg, 'user');
+  chatHistory.push({role:'user', content:msg});
+
+  const typing = addMsg('…', 'ai');
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:200,
+        system: CONCIERGE_CONTEXT,
+        messages: chatHistory.slice(-8)
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Sorry, I had trouble with that. Please call Todd on 021 686 000.';
+    typing.textContent = reply;
+    chatHistory.push({role:'assistant', content:reply});
+  } catch(err) {
+    typing.textContent = 'Connection issue — please call Todd directly on 021 686 000.';
+  }
 }
 </script>
 

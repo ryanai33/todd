@@ -1258,6 +1258,36 @@ footer{
   transition:color 0.25s;
 }
 .footer-phone:hover{color:var(--gold-lt)}
+
+/* Todd v4: Hero left-alignment — non-negotiable */
+.hero-content,
+.hero-inner,
+.hero-body,
+.hero-copy,
+.hero-text {
+  text-align: left;
+  align-items: flex-start;
+}
+.hero-content h1,
+.hero-inner h1,
+.hero-body h1 { text-align: left; }
+.hero-content .hero-stats,
+.hero-inner .hero-stats,
+.hero-content .hero-actions,
+.hero-inner .hero-actions {
+  justify-content: flex-start;
+}
+.hero-content .eyebrow,
+.hero-inner .eyebrow { text-align: left; }
+
+/* Todd v4: Credential badge bottom-LEFT — clear of concierge FAB */
+.hero-badge,
+.hero-credential,
+.hero-license,
+.hero-bottom-badge {
+  right: auto !important;
+  left: 1.75rem !important;
+}
 </style>
 </head>
 <body>
@@ -1345,7 +1375,7 @@ footer{
 <!-- ══════════════ ABOUT ══════════════ -->
 <section class="about" id="about">
   <div class="about-photo-wrap">
-    <img src="images/todd.jpg" alt="Todd Sherley — Principal, Director & Branch Manager, Elite Realty Auckland" loading="lazy"
+    <img src="images/todd.png" alt="Todd Sherley — Principal, Director & Branch Manager, Elite Realty Auckland" loading="lazy"
          onerror="this.src='';this.parentNode.style.background='linear-gradient(135deg,#14213D,#0C1525)'">
     <div class="about-photo-overlay"></div>
     <div class="about-photo-contact">
@@ -1880,154 +1910,152 @@ function handleForm(e) {
 }
 </script>
 
+<!-- ══════════════════════ TODD AI CONCIERGE v4 ══════════════════════════ -->
+<style>
+#tc-wrap{position:fixed;bottom:1.75rem;right:1.75rem;z-index:9900;display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem}
+#tc-box{display:none;flex-direction:column;width:360px;max-height:540px;background:#0C1525;border:1px solid rgba(181,152,90,0.35);box-shadow:0 24px 72px rgba(0,0,0,0.55),0 0 0 1px rgba(181,152,90,0.08);overflow:hidden;font-family:'DM Sans',sans-serif}
+#tc-header{background:linear-gradient(135deg,#14213D 0%,#0C1525 100%);padding:0.9rem 1.125rem;border-bottom:1px solid rgba(181,152,90,0.18);display:flex;align-items:center;gap:0.75rem;flex-shrink:0}
+#tc-avatar{width:36px;height:36px;border-radius:50%;background:rgba(181,152,90,0.12);border:1px solid rgba(181,152,90,0.38);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+#tc-name{font-size:0.80rem;font-weight:700;letter-spacing:0.08em;color:#fff;line-height:1.2;display:block}
+#tc-sub{font-size:0.75rem;letter-spacing:0.09em;color:#B5985A;margin-top:2px;display:block}
+#tc-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.50);font-size:1.25rem;line-height:1;padding:0;margin-left:auto;flex-shrink:0;transition:color 0.2s}
+#tc-close:hover{color:#fff}
+#tc-msgs{flex:1;overflow-y:auto;padding:1rem 1.125rem;display:flex;flex-direction:column;gap:0.7rem;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(181,152,90,0.22) transparent}
+.tc-ai,.tc-user{padding:0.75rem 0.9rem;font-size:0.88rem;line-height:1.65;max-width:88%;word-break:break-word;color:rgba(255,255,255,0.90)}
+.tc-ai{background:rgba(255,255,255,0.04);border:1px solid rgba(181,152,90,0.14);align-self:flex-start}
+.tc-user{background:rgba(181,152,90,0.11);border:1px solid rgba(181,152,90,0.22);align-self:flex-end}
+#tc-footer{padding:0.75rem 1rem;border-top:1px solid rgba(181,152,90,0.13);display:flex;gap:0.55rem;align-items:center;background:rgba(0,0,0,0.18);flex-shrink:0}
+#tc-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:0.875rem;padding:0.6rem 0.8rem;outline:none;transition:border-color 0.2s;font-family:'DM Sans',sans-serif}
+#tc-input:focus{border-color:#B5985A}
+#tc-input:disabled{opacity:0.5}
+#tc-send{width:36px;height:36px;flex-shrink:0;background:#B5985A;border:none;cursor:pointer;color:#0C1525;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s,transform 0.15s}
+#tc-send:hover{background:#CEAD76;transform:translateX(2px)}
+#tc-send:disabled{background:rgba(181,152,90,0.28);cursor:default;transform:none}
+#tc-fab{width:56px;height:56px;background:linear-gradient(135deg,#B5985A,#9A7D42);border:none;cursor:pointer;box-shadow:0 8px 30px rgba(181,152,90,0.42);display:flex;align-items:center;justify-content:center;font-size:1.5rem;transition:transform 0.25s,box-shadow 0.25s;flex-shrink:0}
+#tc-fab:hover{transform:scale(1.07);box-shadow:0 12px 40px rgba(181,152,90,0.58)}
+</style>
 
-<!-- ══════════════ AI CONCIERGE ══════════════ -->
-<div id="concierge-wrap" style="
-  position:fixed;bottom:2rem;right:2rem;z-index:9000;
-  display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
-
-  <!-- Chat window -->
-  <div id="concierge-box" style="
-    display:none;
-    width:360px;max-height:520px;
-    background:#0C1525;
-    border:1px solid rgba(181,152,90,0.35);
-    box-shadow:0 24px 60px rgba(0,0,0,0.45);
-    flex-direction:column;overflow:hidden;">
-    
-    <!-- Header -->
-    <div style="
-      background:linear-gradient(135deg,#14213D,#0C1525);
-      padding:1rem 1.25rem;
-      border-bottom:1px solid rgba(181,152,90,0.2);
-      display:flex;align-items:center;gap:0.75rem;">
-      <div style="
-        width:38px;height:38px;border-radius:50%;
-        background:rgba(181,152,90,0.15);
-        border:1px solid rgba(181,152,90,0.4);
-        display:flex;align-items:center;justify-content:center;
-        font-size:1.1rem;flex-shrink:0;">🏡</div>
+<div id="tc-wrap">
+  <div id="tc-box" role="dialog" aria-label="Todd Sherley AI Property Concierge">
+    <div id="tc-header">
+      <div id="tc-avatar">&#127968;</div>
       <div>
-        <div style="font-family:Montserrat,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;color:#fff">Todd's Concierge</div>
-        <div style="font-family:Montserrat,sans-serif;font-size:0.62rem;letter-spacing:0.1em;color:#B5985A;margin-top:2px">AI Property Assistant</div>
+        <span id="tc-name">Todd's Concierge</span>
+        <span id="tc-sub">AI Property Assistant</span>
       </div>
-      <button onclick="toggleConcierge()" style="
-        margin-left:auto;color:rgba(255,255,255,0.5);font-size:1.2rem;
-        background:none;border:none;cursor:pointer;line-height:1;
-        transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&#215;</button>
+      <button id="tc-close" onclick="tcToggle()" aria-label="Close">&#215;</button>
     </div>
-
-    <!-- Messages -->
-    <div id="concierge-msgs" style="
-      flex:1;overflow-y:auto;padding:1.25rem;
-      display:flex;flex-direction:column;gap:0.75rem;
-      scrollbar-width:thin;scrollbar-color:rgba(181,152,90,0.3) transparent;">
-      <div class="cmsg-ai" style="
-        background:rgba(255,255,255,0.05);
-        border:1px solid rgba(181,152,90,0.15);
-        padding:0.85rem 1rem;
-        font-family:'DM Sans',sans-serif;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88);
-        max-width:90%;align-self:flex-start;">
-        Hi! I'm Todd's AI Concierge. I can answer questions about his listings, services, or how to book an appraisal. How can I help?
-      </div>
+    <div id="tc-msgs">
+      <div class="tc-ai">Hi — I'm Todd's AI Concierge. Ask me about his listings, process, or how to book a free appraisal.</div>
     </div>
-
-    <!-- Input -->
-    <div style="
-      padding:0.85rem 1rem;
-      border-top:1px solid rgba(181,152,90,0.15);
-      display:flex;gap:0.6rem;align-items:center;background:rgba(0,0,0,0.2);">
-      <input id="concierge-input" type="text" placeholder="Ask about Todd's listings…"
-        style="
-          flex:1;background:rgba(255,255,255,0.05);
-          border:1px solid rgba(255,255,255,0.12);
-          color:#fff;font-family:'DM Sans',sans-serif;font-size:0.88rem;
-          padding:0.65rem 0.85rem;outline:none;
-          transition:border-color 0.2s;"
-        onfocus="this.style.borderColor='#B5985A'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"
-        onkeydown="if(event.key==='Enter')sendConcierge()">
-      <button onclick="sendConcierge()" id="concierge-send" style="
-        width:38px;height:38px;flex-shrink:0;
-        background:#B5985A;border:none;cursor:pointer;
-        display:flex;align-items:center;justify-content:center;
-        font-size:1rem;color:#0C1525;
-        transition:background 0.2s;"
-        onmouseover="this.style.background='#CEAD76'" onmouseout="this.style.background='#B5985A'">&#8594;</button>
+    <div id="tc-footer">
+      <input id="tc-input" type="text" placeholder="Ask about Todd's listings&#8230;" autocomplete="off"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSend()}">
+      <button id="tc-send" onclick="tcSend()" aria-label="Send">&#8594;</button>
     </div>
   </div>
-
-  <!-- FAB trigger -->
-  <button id="concierge-fab" onclick="toggleConcierge()" aria-label="Open AI Concierge" style="
-    width:58px;height:58px;
-    background:linear-gradient(135deg,#B5985A,#9A7D42);
-    border:none;cursor:pointer;
-    box-shadow:0 8px 28px rgba(181,152,90,0.45);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.5rem;
-    transition:transform 0.25s,box-shadow 0.25s;"
-    onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 12px 36px rgba(181,152,90,0.6)'"
-    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 8px 28px rgba(181,152,90,0.45)'">
-    <span id="fab-icon">🏡</span>
+  <button id="tc-fab" onclick="tcToggle()" aria-label="Open Todd's AI Concierge">
+    <span id="tc-fab-icon">&#127968;</span>
   </button>
 </div>
 
 <script>
-const CONCIERGE_CONTEXT = ;
+(function(){
+  var TC_KEY   = 'sk-ant-REPLACE_WITH_YOUR_ANTHROPIC_KEY';
+  var TC_MODEL = 'claude-sonnet-4-20250514';
+  var TC_SYS   = 'You are the AI Concierge for Todd Sherley, an elite Auckland real estate agent.
 
-let conciergeOpen = false;
-let chatHistory = [];
+TODD SHERLEY — KEY FACTS:
+- Principal & Branch Manager, Elite Realty, Shortland St Auckland CBD
+- 12+ years experience | $500M+ in career sales | 23 suburb records
+- Law & Business degree, University of Waikato
+- 2017 National Rising Star Auctioneer Champion
+- Amazon #1 Bestseller: How to $ell Your Home For Top Dollar
+- Licensed Salesperson REAA 2008
+- Largest buyer database in the AT Realty network
+- Contact: 021 686 000 | todd@eliterealty.net.nz | 7 days
 
-function toggleConcierge() {
-  const box = document.getElementById('concierge-box');
-  conciergeOpen = !conciergeOpen;
-  box.style.display = conciergeOpen ? 'flex' : 'none';
-  document.getElementById('fab-icon').textContent = conciergeOpen ? '✕' : '🏡';
-  if(conciergeOpen) setTimeout(() => document.getElementById('concierge-input').focus(), 100);
-}
+CURRENT LISTINGS (https://www.atrealty.co.nz/toddsherley/):
+- 14 King Edward St, Mount Eden — 5 bed, deadline sale
+- Suite 22/8 Dock St, Auckland Central — 3 bed, 3 car, EOI $1,199,000
+- Unit 11/8 Chivalry Rd, Glenfield — 3 bed, price by negotiation
+- 52 Hain Ave, Mangere East — 9 bed, price by negotiation
+- 17 McLeod Rd, Weymouth — 4 bed, EOI $749,000
 
-function addMsg(text, role) {
-  const msgs = document.getElementById('concierge-msgs');
-  const isAi = role === 'ai';
-  const div = document.createElement('div');
-  div.style.cssText = isAi
-    ? 'background:rgba(255,255,255,0.05);border:1px solid rgba(181,152,90,0.15);padding:0.85rem 1rem;font-family:"DM Sans",sans-serif;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88);max-width:90%;align-self:flex-start;'
-    : 'background:rgba(181,152,90,0.12);border:1px solid rgba(181,152,90,0.25);padding:0.85rem 1rem;font-family:"DM Sans",sans-serif;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88);max-width:90%;align-self:flex-end;';
-  div.textContent = text;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-  return div;
-}
+TONE: Professional, warm, concise. Always guide toward Todd.
+Encourage free appraisal bookings. Never invent prices or results.
+Respond in under 120 words.';
+  var tcOpen = false;
+  var tcHistory = [];
 
-async function sendConcierge() {
-  const input = document.getElementById('concierge-input');
-  const msg = input.value.trim();
-  if(!msg) return;
-  input.value = '';
-  addMsg(msg, 'user');
-  chatHistory.push({role:'user', content:msg});
+  window.tcToggle = function(){
+    tcOpen = !tcOpen;
+    var box  = document.getElementById('tc-box');
+    var icon = document.getElementById('tc-fab-icon');
+    box.style.display = tcOpen ? 'flex' : 'none';
+    icon.innerHTML    = tcOpen ? '&#10005;' : '&#127968;';
+    if(tcOpen){ setTimeout(function(){ document.getElementById('tc-input').focus(); }, 80); }
+  };
 
-  const typing = addMsg('…', 'ai');
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:200,
-        system: CONCIERGE_CONTEXT,
-        messages: chatHistory.slice(-8)
-      })
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || 'Sorry, I had trouble with that. Please call Todd on 021 686 000.';
-    typing.textContent = reply;
-    chatHistory.push({role:'assistant', content:reply});
-  } catch(err) {
-    typing.textContent = 'Connection issue — please call Todd directly on 021 686 000.';
+  function tcAddMsg(text, role){
+    var c = document.getElementById('tc-msgs');
+    var d = document.createElement('div');
+    d.className   = role === 'ai' ? 'tc-ai' : 'tc-user';
+    d.textContent = text;
+    c.appendChild(d);
+    c.scrollTop = c.scrollHeight;
+    return d;
   }
-}
+
+  window.tcSend = function(){
+    var input = document.getElementById('tc-input');
+    var send  = document.getElementById('tc-send');
+    var msg   = input.value.trim();
+    if(!msg || send.disabled) return;
+    input.value    = '';
+    input.disabled = true;
+    send.disabled  = true;
+    tcAddMsg(msg, 'user');
+    tcHistory.push({role:'user', content:msg});
+    var typing = tcAddMsg('Thinking…', 'ai');
+
+    fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': TC_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model:      TC_MODEL,
+        max_tokens: 200,
+        system:     TC_SYS,
+        messages:   tcHistory.slice(-10)
+      })
+    })
+    .then(function(res){
+      if(!res.ok){ return res.json().then(function(e){ throw new Error(e.error && e.error.message ? e.error.message : 'HTTP ' + res.status); }); }
+      return res.json();
+    })
+    .then(function(data){
+      var reply = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : 'Please call Todd on 021 686 000.';
+      typing.textContent = reply;
+      tcHistory.push({role:'assistant', content:reply});
+    })
+    .catch(function(err){
+      console.error('Concierge:', err);
+      typing.textContent = 'Connection issue — please call Todd directly on 021 686 000.';
+    })
+    .finally(function(){
+      input.disabled = false;
+      send.disabled  = false;
+      input.focus();
+    });
+  };
+})();
 </script>
+<!-- ══════════════════════════════════════════════════════════════════════ -->
 
 </body>
 </html>

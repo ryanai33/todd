@@ -1367,61 +1367,6 @@ section.hero, div.hero, #hero {
   z-index: 3 !important;
 }
 
-/* v6: Hero — full-width section, text constrained to left half */
-section.hero,
-div.hero,
-#hero,
-[class*="hero-section"],
-[class*="hero-wrap"] {
-  width: 100% !important;
-  min-width: 100% !important;
-  position: relative !important;
-}
-.hero-content,
-.hero-inner,
-.hero-body,
-.hero-copy,
-.hero-text {
-  max-width: 640px !important;
-  width: 100% !important;
-  text-align: left !important;
-  align-items: flex-start !important;
-  padding-left: 5vw !important;
-  padding-right: 1rem !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
-}
-.hero-content h1,
-.hero-inner h1,
-.hero-body h1,
-.hero-content h2,
-.hero-inner h2 {
-  text-align: left !important;
-}
-.hero-content .eyebrow,
-.hero-inner .eyebrow,
-.hero-content [class*="eyebrow"] {
-  text-align: left !important;
-}
-.hero-content .hero-actions,
-.hero-inner .hero-actions,
-.hero-content .hero-buttons,
-.hero-inner .hero-buttons,
-.hero-content .hero-stats,
-.hero-inner .hero-stats {
-  justify-content: flex-start !important;
-  text-align: left !important;
-}
-@media (max-width: 768px) {
-  .hero-content, .hero-inner, .hero-body, .hero-copy, .hero-text {
-    max-width: 100% !important;
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-}
-
-
 /* v6: Testimonials — static grid, no auto-scroll */
 .testimonials-track,
 .testimonial-slider,
@@ -1471,7 +1416,117 @@ div.hero,
   z-index: 2;
 }
 
+
+/* v7 hero — section always full viewport width */
+section.hero,div.hero,#hero,[class*="hero-section"],[class*="hero-wrap"]{
+  width:100vw !important;
+  min-width:100% !important;
+  max-width:none !important;
+  padding-right:0 !important;
+  box-sizing:border-box !important;
+  background-size:cover !important;
+  background-position:center !important;
+}
+/* inner text block constrained to left ~50% */
+.hero-content,.hero-inner,.hero-body,.hero-copy,.hero-text{
+  max-width:600px !important;
+  width:auto !important;
+  padding-right:2rem !important;
+  padding-left:5vw !important;
+  margin-left:0 !important;
+  margin-right:auto !important;
+  text-align:left !important;
+  align-items:flex-start !important;
+  box-sizing:border-box !important;
+}
+.hero-content h1,.hero-inner h1,.hero-content h2,.hero-inner h2{text-align:left !important;}
+.hero-content .hero-actions,.hero-inner .hero-actions,.hero-buttons{justify-content:flex-start !important;}
+.hero-content .eyebrow,.hero-inner .eyebrow{text-align:left !important;}
+@media(max-width:768px){
+  .hero-content,.hero-inner,.hero-body,.hero-copy,.hero-text{
+    max-width:100% !important;padding-left:1.25rem !important;padding-right:1.25rem !important;
+  }
+}
+
+
+/* v7: Career milestone card — CSS layout fix */
+.result-card:last-child,
+.result-card--stat,
+[class*="result-card"][class*="stat"],
+[class*="result-card"][class*="milestone"] {
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-end !important;
+  align-items:flex-start !important;
+  padding:1.5rem !important;
+  box-sizing:border-box !important;
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:340px !important;
+}
+/* kill any absolute-positioned overlapping layers */
+.result-card:last-child [class*="result-label"],
+.result-card:last-child [class*="eyebrow"],
+.result-card:last-child [class*="stat-eyebrow"] {
+  position:static !important;
+  display:block !important;
+  margin-bottom:0.5rem !important;
+}
+.result-card:last-child [class*="stat-number"],
+.result-card:last-child h2,
+.result-card:last-child h3 {
+  position:static !important;
+  display:block !important;
+  margin:0 0 0.5rem 0 !important;
+  line-height:1 !important;
+}
+/* ensure text on photo cards is readable */
+.result-card {
+  position:relative !important;
+  overflow:hidden !important;
+}
+.result-card::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.70) 0%,rgba(0,0,0,.10) 55%,transparent 100%);
+  pointer-events:none;
+  z-index:1;
+}
+.result-card>*{position:relative;z-index:2;}
+
+
+/* v7: testimonials — no auto-scroll */
+[class*="testimonial-track"],[class*="testimonials-slider"]{animation:none !important;transition:none !important;}
+
 </style>
+
+<style id="tc-styles">
+#tcW{position:fixed;bottom:1.75rem;right:1.75rem;z-index:2147483647;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem}
+#tcB{display:none;flex-direction:column;width:355px;max-height:520px;background:#0C1525;border:1px solid rgba(181,152,90,.38);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.65);overflow:hidden;font-family:'DM Sans',Arial,sans-serif}
+#tcH{background:linear-gradient(135deg,#14213D,#0C1525);padding:.85rem 1.1rem;border-bottom:1px solid rgba(181,152,90,.15);display:flex;align-items:center;gap:.7rem;flex-shrink:0}
+#tcAv{width:34px;height:34px;border-radius:50%;background:#B5985A;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#tcNm{font-size:.80rem;font-weight:700;letter-spacing:.08em;color:#fff;display:block;line-height:1.2}
+#tcSb{font-size:.75rem;letter-spacing:.08em;color:#B5985A;display:block;margin-top:2px}
+#tcX{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.45);margin-left:auto;display:flex;align-items:center;padding:4px;transition:color .2s;flex-shrink:0}
+#tcX:hover{color:#fff}
+#tcMsgs{flex:1;overflow-y:auto;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.65rem;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(181,152,90,.2) transparent}
+.tcA,.tcU{padding:.7rem .85rem;font-size:.875rem;line-height:1.65;max-width:90%;word-break:break-word;color:rgba(255,255,255,.90);border-radius:3px}
+.tcA{background:rgba(255,255,255,.04);border:1px solid rgba(181,152,90,.13);align-self:flex-start}
+.tcU{background:rgba(181,152,90,.12);border:1px solid rgba(181,152,90,.25);align-self:flex-end}
+.tcTyping{display:flex;align-items:center;gap:5px;padding:.8rem 1rem}
+.tcTyping span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#B5985A;animation:tcDot 1.2s infinite ease-in-out}
+.tcTyping span:nth-child(2){animation-delay:.22s}.tcTyping span:nth-child(3){animation-delay:.44s}
+@keyframes tcDot{0%,80%,100%{transform:scale(.55);opacity:.35}40%{transform:scale(1);opacity:1}}
+#tcFt{padding:.7rem .9rem;border-top:1px solid rgba(181,152,90,.13);display:flex;gap:.5rem;align-items:center;background:rgba(0,0,0,.22);flex-shrink:0}
+#tcIn{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:#fff;font-size:.875rem;padding:.55rem .8rem;outline:none;border-radius:2px;font-family:'DM Sans',Arial,sans-serif;transition:border-color .2s}
+#tcIn:focus{border-color:#B5985A}#tcIn::placeholder{color:rgba(255,255,255,.28)}#tcIn:disabled{opacity:.4}
+#tcSnd{width:34px;height:34px;flex-shrink:0;background:#B5985A;border:none;cursor:pointer;color:#0C1525;display:flex;align-items:center;justify-content:center;border-radius:2px;font-size:1.1rem;font-weight:700;transition:background .2s,transform .15s}
+#tcSnd:hover{background:#CEAD76;transform:translateX(2px)}#tcSnd:disabled{background:rgba(181,152,90,.22);cursor:default;transform:none}
+#tcFab{width:52px;height:52px;background:linear-gradient(135deg,#C4A45A,#9A7D42);border:none;cursor:pointer;border-radius:50%;box-shadow:0 6px 24px rgba(181,152,90,.48);display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;flex-shrink:0}
+#tcFab:hover{transform:scale(1.09);box-shadow:0 10px 36px rgba(181,152,90,.62)}
+</style>
+
 </head>
 <body>
 
@@ -1525,9 +1580,8 @@ div.hero,
   
   </div>
 
-  <div class="hero-badge">
-    <span class="hero-badge-line">Licensed REAA 2008</span>
-    <span class="hero-badge-num">Elite Realty</span>
+  
+    
   </div>
 </section>
 
@@ -1776,8 +1830,7 @@ div.hero,
             <div style="font-family:Montserrat,sans-serif;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:0.75rem">Total career sales</div>
           </div>
         </div>
-        <div class="result-card" style="display:flex;flex-direction:column;justify-content:flex-end;padding:1.75rem 1.5rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#1a2d4f 0%,#0C1525 100%);min-height:380px;"><span style="font-family:Montserrat,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;color:#B5985A;text-transform:uppercase;display:block;margin-bottom:0.5rem;">CAREER MILESTONE</span><span style="font-family:Cormorant Garamond,serif;font-size:clamp(3rem,5vw,4.5rem);font-weight:600;color:#B5985A;line-height:1;display:block;margin-bottom:0.75rem;">$500M+</span><span style="font-family:Montserrat,sans-serif;font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.04em;display:block;margin-bottom:0.4rem;">$500M+ Sold</span><span style="font-family:'DM Sans',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.72);display:block;">Largest buyer database in the network</span></div>
-          <div class="result-card-address">Auckland-Wide</div>
+                  <div class="result-card-address">Auckland-Wide</div>
           <div class="result-card-price">$500M+ Sold</div>
           <div class="result-card-meta">Largest buyer database in the network</div>
         </div>
@@ -2109,75 +2162,39 @@ function handleForm(e) {
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 
-
-
-</body>
-<!-- TODD CONCIERGE v6 START -->
-<style>
-#tcW{position:fixed !important;bottom:1.75rem;right:1.75rem;z-index:2147483647;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;pointer-events:auto}
-#tcB{display:none;flex-direction:column;width:358px;max-height:520px;background:#0C1525;border:1px solid rgba(181,152,90,.38);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.6);overflow:hidden;font-family:'DM Sans',Arial,sans-serif;pointer-events:auto}
-#tcH{background:linear-gradient(135deg,#14213D,#0C1525);padding:.85rem 1.1rem;border-bottom:1px solid rgba(181,152,90,.16);display:flex;align-items:center;gap:.7rem;flex-shrink:0}
-#tcAv{width:34px;height:34px;border-radius:50%;background:#B5985A;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-#tcNm{font-size:.80rem;font-weight:700;letter-spacing:.08em;color:#fff;display:block;line-height:1.2}
-#tcSb{font-size:.75rem;letter-spacing:.09em;color:#B5985A;display:block;margin-top:1px}
-#tcX{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.45);margin-left:auto;display:flex;align-items:center;padding:4px;border-radius:2px;transition:color .2s;flex-shrink:0}
-#tcX:hover{color:#fff}
-#tcM{flex:1;overflow-y:auto;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.65rem;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(181,152,90,.2) transparent}
-.tcA,.tcU{padding:.7rem .85rem;font-size:.875rem;line-height:1.65;max-width:90%;word-break:break-word;color:rgba(255,255,255,.90);border-radius:3px}
-.tcA{background:rgba(255,255,255,.04);border:1px solid rgba(181,152,90,.13);align-self:flex-start}
-.tcU{background:rgba(181,152,90,.12);border:1px solid rgba(181,152,90,.25);align-self:flex-end}
-.tcT{display:flex;align-items:center;gap:5px;padding:.8rem 1rem;min-height:2.5rem}
-.tcT span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#B5985A;animation:tcD 1.2s infinite ease-in-out}
-.tcT span:nth-child(2){animation-delay:.22s}
-.tcT span:nth-child(3){animation-delay:.44s}
-@keyframes tcD{0%,80%,100%{transform:scale(.55);opacity:.35}40%{transform:scale(1);opacity:1}}
-#tcF{padding:.7rem .9rem;border-top:1px solid rgba(181,152,90,.13);display:flex;gap:.5rem;align-items:center;background:rgba(0,0,0,.22);flex-shrink:0}
-#tcI{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);color:#fff;font-size:.875rem;padding:.55rem .8rem;outline:none;border-radius:2px;font-family:'DM Sans',Arial,sans-serif;transition:border-color .2s}
-#tcI:focus{border-color:#B5985A}
-#tcI::placeholder{color:rgba(255,255,255,.28)}
-#tcI:disabled{opacity:.4}
-#tcS{width:34px;height:34px;flex-shrink:0;background:#B5985A;border:none;cursor:pointer;color:#0C1525;display:flex;align-items:center;justify-content:center;border-radius:2px;font-size:1.05rem;font-weight:700;transition:background .2s,transform .15s}
-#tcS:hover{background:#CEAD76;transform:translateX(2px)}
-#tcS:disabled{background:rgba(181,152,90,.22);cursor:default;transform:none}
-#tcFab{width:52px;height:52px;background:linear-gradient(135deg,#C4A45A,#9A7D42);border:none;cursor:pointer;border-radius:50%;box-shadow:0 6px 24px rgba(181,152,90,.48);display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;flex-shrink:0;pointer-events:auto}
-#tcFab:hover{transform:scale(1.09);box-shadow:0 10px 36px rgba(181,152,90,.62)}
-#tcFO{display:flex;align-items:center;justify-content:center}
-#tcFC{display:none;align-items:center;justify-content:center}
-</style>
-
+<!-- TODD CONCIERGE v7 -->
 <div id="tcW">
-  <div id="tcB" role="dialog" aria-label="Todd Sherley AI Property Concierge">
+  <div id="tcB" role="dialog" aria-label="Todd's Property Concierge">
     <div id="tcH">
       <div id="tcAv"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0C1525" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></div>
       <div><span id="tcNm">Todd&#39;s Concierge</span><span id="tcSb">AI Property Assistant</span></div>
       <button id="tcX" onclick="tcT()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
-    <div id="tcM">
-      <div class="tcA">Hi &#8212; I&#39;m Todd&#39;s AI Property Concierge. Ask me about his listings, experience, or how to book a free appraisal.</div>
+    <div id="tcMsgs">
+      <div class="tcA">Hi &#8212; I&#39;m Todd&#39;s Property Concierge. Ask me about his listings, experience, or how to book a free appraisal.</div>
     </div>
-    <div id="tcF">
-      <input id="tcI" type="text" placeholder="Ask about Todd&#39;s listings&#8230;" autocomplete="off"
+    <div id="tcFt">
+      <input id="tcIn" type="text" placeholder="Ask about Todd&#39;s listings&#8230;" autocomplete="off"
         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSd()}">
-      <button id="tcS" onclick="tcSd()" aria-label="Send">&#8594;</button>
+      <button id="tcSnd" onclick="tcSd()" aria-label="Send">&#8594;</button>
     </div>
   </div>
-  <button id="tcFab" onclick="tcT()" aria-label="Open concierge">
-    <span id="tcFO"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0C1525" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></span>
-    <span id="tcFC"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0C1525" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+  <button id="tcFab" onclick="tcT()" aria-label="Open concierge" title="Todd&#39;s Property Concierge">
+    <span id="tcFO" style="display:flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0C1525" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></span>
+    <span id="tcFC" style="display:none;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0C1525" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
   </button>
 </div>
-
 <script>
 (function(){
   var R={
-    appraisal:["Todd offers free no-obligation appraisals 7 days a week across Auckland. Book above or call 021 686 000 — full market assessment ready within 24 hours.","A free appraisal takes about 30 minutes. Todd walks you through comparable sales and a realistic price range. Call 021 686 000 to lock in a time."],
-    listings:["Todd has 5 active listings: Mount Eden (5 bed, deadline sale), Auckland Central (3 bed, EOI $1,199,000), Glenfield (3 bed), Mangere East (9 bed), and Weymouth (4 bed, EOI $749,000). See all at atrealty.co.nz/toddsherley","Properties range from $749k in Weymouth to $1.199M in Auckland Central. Todd also holds off-market opportunities for qualified buyers — call 021 686 000."],
-    sell:["Todd's days-on-market average is well below the Auckland median. He brings the largest buyer database in AT Realty plus a targeted campaign for every listing. Book a free appraisal above to start.","Selling with Todd means 23 suburb records, a proven auction track record, and 12 years of buyer relationships. Book a free appraisal above."],
-    buy:["Todd works with buyers too — his database includes off-market properties never listed on Trade Me. Call 021 686 000 to discuss your brief.","Give Todd your brief — suburb, budget, must-haves — and he matches you against active and off-market stock first. Call 021 686 000."],
-    experience:["Todd has 12+ years in Auckland real estate, $500M+ in career sales, and 23 suburb records. Law and Business degree from Waikato, 2017 National Rising Star Auctioneer Champion.","Todd wrote the Amazon no.1 bestseller 'How to $ell Your Home For Top Dollar'. He's been at Elite Realty, Shortland St CBD since 2012."],
-    contact:["Todd is available 7 days: call or text 021 686 000, email todd@eliterealty.net.nz, or visit Shortland Street Auckland CBD. Typically replies within the hour.","Best way: call 021 686 000 (7 days). For an appraisal, use the booking form above and he'll confirm same day."],
-    book:["Hit 'Book an Appraisal' above or call 021 686 000. Todd covers all Auckland suburbs and turnaround is within 24 hours.","Use the booking form above or call 021 686 000. Todd confirms within the hour and brings a full comparable sales report."],
-    fallback:["Great question for Todd directly — he's on 021 686 000 seven days or you can book a free appraisal above.","I'd point you to Todd for that one. Available 7 days on 021 686 000 and responds fast.","Best answered by Todd directly. Hit 'Book an Appraisal' above or call 021 686 000 any day."]
+    appraisal:["Todd offers free no-obligation appraisals 7 days across Auckland. Book above or call 021 686 000 — market assessment ready within 24 hours.","A free appraisal takes about 30 minutes. Todd walks through comparable sales and a realistic price range. Call 021 686 000 to lock in a time."],
+    listings:["Active listings: Mount Eden (5 bed, deadline sale), Auckland Central (3 bed, EOI $1.199M), Glenfield (3 bed PBN), Mangere East (9 bed PBN), Weymouth (4 bed, EOI $749k). See all at atrealty.co.nz/toddsherley","Properties range from $749k in Weymouth to $1.199M in Auckland Central. Todd also has off-market stock — call 021 686 000."],
+    sell:["Todd’s days-on-market average is well below Auckland’s median. He brings the largest buyer database in AT Realty plus a targeted campaign per listing. Book a free appraisal above.","Selling with Todd means 23 suburb records, proven auction process, and 12 years of buyer relationships. Book above."],
+    buy:["Todd works with buyers too — his database includes off-market properties never on Trade Me. Call 021 686 000 to discuss your brief.","Give Todd your brief — suburb, budget, must-haves — and he matches you against active and off-market stock first."],
+    experience:["Todd has 12+ years in Auckland real estate, $500M+ in career sales, 23 suburb records, Law & Business degree from Waikato, and was 2017 National Rising Star Auctioneer Champion.","Todd wrote the Amazon no.1 bestseller ‘How to $ell Your Home For Top Dollar’. At Elite Realty, Shortland St CBD since 2012."],
+    contact:["Todd is available 7 days: 021 686 000, todd@eliterealty.net.nz, or Shortland Street Auckland CBD. Typically replies within the hour.","Call 021 686 000 (7 days). For an appraisal, use the booking form above and he’ll confirm same day."],
+    book:["Hit ‘Book an Appraisal’ above or call 021 686 000. All Auckland suburbs, turnaround within 24 hours.","Use the booking form above or call 021 686 000. Todd confirms within the hour with a comparable sales report."],
+    fallback:["Great question for Todd directly — 021 686 000 seven days or book a free appraisal above.","Best answered by Todd. Hit ‘Book an Appraisal’ above or call 021 686 000 any day."]
   };
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
   function cls(m){
@@ -2196,31 +2213,34 @@ function handleForm(e) {
     document.getElementById('tcB').style.display=open?'flex':'none';
     document.getElementById('tcFO').style.display=open?'none':'flex';
     document.getElementById('tcFC').style.display=open?'flex':'none';
-    if(open)setTimeout(function(){document.getElementById('tcI').focus();},80);
+    if(open) setTimeout(function(){document.getElementById('tcIn').focus();},80);
   };
   function add(txt,role,raw){
-    var c=document.getElementById('tcM'),d=document.createElement('div');
+    var c=document.getElementById('tcMsgs'),d=document.createElement('div');
     d.className=role==='a'?'tcA':'tcU';
-    if(raw)d.innerHTML=txt;else d.textContent=txt;
+    if(raw) d.innerHTML=txt; else d.textContent=txt;
     c.appendChild(d);c.scrollTop=c.scrollHeight;return d;
   }
   window.tcSd=function(){
-    var i=document.getElementById('tcI'),b=document.getElementById('tcS'),m=i.value.trim();
-    if(!m||b.disabled)return;
+    var i=document.getElementById('tcIn'),b=document.getElementById('tcSnd'),m=i.value.trim();
+    if(!m||b.disabled) return;
     i.value='';i.disabled=true;b.disabled=true;
     add(m,'u',false);
     var t=document.createElement('div');
-    t.className='tcA tcT';t.innerHTML='<span></span><span></span><span></span>';
-    document.getElementById('tcM').appendChild(t);
-    document.getElementById('tcM').scrollTop=99999;
+    t.className='tcA tcTyping';t.innerHTML='<span></span><span></span><span></span>';
+    document.getElementById('tcMsgs').appendChild(t);
+    document.getElementById('tcMsgs').scrollTop=99999;
     setTimeout(function(){
       t.className='tcA';t.innerHTML='';t.textContent=pick(R[cls(m.toLowerCase())]);
-      document.getElementById('tcM').scrollTop=99999;
+      document.getElementById('tcMsgs').scrollTop=99999;
       i.disabled=false;b.disabled=false;i.focus();
-    },600+Math.random()*350);
+    },650+Math.random()*300);
   };
 })();
 </script>
-<!-- TODD CONCIERGE v6 END -->
+<!-- END TODD CONCIERGE v7 -->
+
+</body>
+
 
 </html>

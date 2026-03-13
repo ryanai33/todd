@@ -1527,6 +1527,18 @@ section.hero,div.hero,#hero,[class*="hero-section"],[class*="hero-wrap"]{
 #tcFab:hover{transform:scale(1.09);box-shadow:0 10px 36px rgba(181,152,90,.62)}
 </style>
 
+<style id="v8-hero-fix">
+/* v8: hero background elements must always be full-width/height */
+.hero-bg,
+.hero-overlay,
+.hero-grain {
+  max-width: none !important;
+  width: 100% !important;
+  right: 0 !important;
+  left: 0 !important;
+  inset: 0 !important;
+}
+</style>
 </head>
 <body>
 
@@ -2148,7 +2160,7 @@ function handleForm(e) {
 
 <div>
         <span id="tc-name">Todd's Concierge</span>
-        <span id="tc-sub">AI Property Assistant</span>
+        
       </div>
       <button id="tc-close" onclick="tcToggle()" aria-label="Close">&#215;</button>
     </div>
